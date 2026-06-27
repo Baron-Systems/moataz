@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  moataz:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: moataz-website
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # nginx-proxy يتعرف تلقائياً على الدومين من هذه المتغيرات
+      - VIRTUAL_HOST=moataz.albaronsystems.com
+      - VIRTUAL_PORT=3000
+      - LETSENCRYPT_HOST=moataz.albaronsystems.com
+    volumes:
+      - ./data:/app/data
+    networks:
+      - fm-global-frontend-network
+    expose:
+      - "3000"
+
+networks:
+  fm-global-frontend-network:
+    external: true
