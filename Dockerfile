@@ -29,15 +29,9 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/static ./.next/static
 
-# Copy prisma files for db push/migrate
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
-COPY --from=builder /app/package.json ./package.json
-
-# Install prisma CLI for db push
-RUN npm install prisma --no-save
+# Copy pre-built database from builder stage
+COPY --from=builder /app/data /app/data
 
 EXPOSE 3000
 
-# Run db push then start server
-CMD ["sh", "-c", "npx prisma db push --accept-data-loss && node server.js"]
+CMD ["node", "server.js"]
