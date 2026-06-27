@@ -41,4 +41,4 @@ COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 EXPOSE 3000
 
 # Run db push then start server
-CMD ["sh", "-c", "npx prisma db push --accept-data-loss && node server.js"]
+CMD ["sh", "-c", "node ./node_modules/prisma/build/index.js db push --accept-data-loss && node server.js"]
