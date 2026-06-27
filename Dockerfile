@@ -12,8 +12,8 @@ RUN npx prisma db push
 RUN npx prisma generate
 RUN npm run build
 
-# Production stage - full node image for fast prisma install
-FROM node:20 AS runner
+# Production stage - slim image balances size and install speed
+FROM node:20-slim AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
