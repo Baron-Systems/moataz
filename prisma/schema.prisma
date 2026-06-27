@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model VisitType {
+  id          Int      @id @default(autoincrement())
+  name        String
+  slotCount   Int      @default(1) // number of 30-min slots needed
+  minDuration Int      @default(30)
+  maxDuration Int      @default(60)
+  restMinutes Int      @default(15)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model WorkSchedule {
+  id        Int      @id @default(autoincrement())
+  dayOfWeek Int      // 0=Sunday, 1=Monday... 6=Saturday
+  startTime String   // HH:mm format
+  endTime   String   // HH:mm format
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Holiday {
+  id          Int      @id @default(autoincrement())
+  title       String
+  startDate   DateTime
+  endDate     DateTime
+  isFullDay   Boolean  @default(true)
+  startTime   String?  // HH:mm format (for partial-day holidays)
+  endTime     String?  // HH:mm format (for partial-day holidays)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TimeBlock {
+  id        Int      @id @default(autoincrement())
+  title     String
+  date      DateTime
+  startTime String   // HH:mm format
+  endTime   String   // HH:mm format
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Appointment {
+  id            Int      @id @default(autoincrement())
+  fullName      String
+  phone         String
+  visitType     String
+  date          DateTime
+  time          String   // HH:mm format (start time)
+  slotsReserved Int      @default(1) // number of 30-min slots reserved
+  description   String?
+  status        String   @default("pending") // pending, confirmed, cancelled
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  name      String
+  image     String?
+  text      String
+  publishedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

@@ -1,26 +1,71 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --primary: #0F4C81;
+  --secondary: #1E88E5;
+  --light-gray: #F5F7FA;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.125rem;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(30, 136, 229, 0.3), 0 0 60px rgba(15, 76, 129, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(30, 136, 229, 0.5), 0 0 80px rgba(15, 76, 129, 0.25); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.doctor-frame {
+  position: relative;
+  border-radius: 1.5rem;
+  padding: 4px;
+  background: linear-gradient(135deg, rgba(30, 136, 229, 0.6), rgba(15, 76, 129, 0.4), rgba(30, 136, 229, 0.6));
+}
+
+.doctor-frame::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.6rem;
+  background: linear-gradient(135deg, #1E88E5, #0F4C81, #1E88E5);
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(8px);
+}
+
+.doctor-frame img {
+  border-radius: 1.4rem;
+  display: block;
+}
+
+/* Remove native date/time picker indicators to avoid overlapping custom icons */
+input[type="date"],
+input[type="time"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none !important;
 }
