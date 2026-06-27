@@ -6,6 +6,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+ENV DATABASE_URL="file:./data/dev.db"
 RUN npx prisma generate
 RUN npm run build
 
