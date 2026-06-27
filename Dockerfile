@@ -12,8 +12,8 @@ RUN npx prisma db push
 RUN npx prisma generate
 RUN npm run build
 
-# Production stage
-FROM node:20-alpine AS runner
+# Production stage - full node image for faster npm install
+FROM node:20 AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -29,9 +29,15 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/static ./.next/static
 
-# Copy pre-built database from builder stage
-COPY --from=builder /app/data /app/data
+# Copy prisma files for db commands
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
+COPY --from=builder /app/package.json ./package.json
+
+# Install prisma CLI (fast on full node image)
+RUN npm install prisma --no-save
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+# Init DB if missing, then start server
+CMD ["sh", "-c", "test -f /app/data/dev.db || npx prisma db push --accept-data-loss && node server.js"]
