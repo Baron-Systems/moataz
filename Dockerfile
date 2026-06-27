@@ -38,5 +38,7 @@ COPY --from=builder /app/node_modules ./node_modules
 
 EXPOSE 3000
 
-# Init DB if missing, then start server
-CMD ["sh", "-c", "test -f /app/data/dev.db || npx prisma db push --accept-data-loss && node server.js"]
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
