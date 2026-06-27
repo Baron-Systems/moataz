@@ -7,13 +7,12 @@ RUN npm ci
 
 COPY . .
 ENV DATABASE_URL="file:./data/dev.db"
-RUN mkdir -p /app/data
 RUN npx prisma db push
 RUN npx prisma generate
 RUN npm run build
 
-# Production stage - slim image balances size and install speed
-FROM node:20-slim AS runner
+# Production stage - copy full node_modules from builder
+FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -33,10 +32,9 @@ COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
 COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/package-lock.json ./package-lock.json
 
-# Install prisma CLI (fast on full node image with prebuilt binaries)
-RUN npm install prisma --no-save
+# Copy FULL node_modules from builder (includes prisma + all deps)
+COPY --from=builder /app/node_modules ./node_modules
 
 EXPOSE 3000
 
