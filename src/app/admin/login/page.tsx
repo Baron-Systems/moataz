@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
         {/* Logo / Header */}
         <div className="text-center mb-8">
           <div className="mx-auto mb-5">
-            <Image src="/images/logo.png" alt="D.F.C Logo" width={80} height={80} className="rounded-2xl object-contain" />
+            <Image src="/images/logo.png" alt="D.F.C Logo" width={80} height={80} className="rounded-2xl object-contain mx-auto" />
           </div>
           <h1 className="text-2xl font-bold text-slate-800">بوابة الطبيب</h1>
           <p className="text-slate-500 mt-2">تسجيل الدخول إلى لوحة تحكم مركز D.F.C</p>
