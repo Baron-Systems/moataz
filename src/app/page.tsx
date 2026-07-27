@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { prisma } from "@/lib/prisma";
 import { formatSchedule } from "@/lib/schedule";
-import { Phone, Calendar, MapPin, ChevronLeft, Heart, Shield, Clock, Award, Stethoscope, Users, ArrowLeft, Star, Footprints } from "lucide-react";
+import { Phone, Calendar, MapPin, ChevronLeft, Heart, Shield, Clock, Award, Stethoscope, Users, ArrowLeft, Star, Footprints, Syringe } from "lucide-react";
 
 const stats = [
   { num: "+10", label: "سنوات خبرة" },
@@ -22,11 +22,11 @@ const features = [
 
 const services = [
   { icon: Footprints, title: "علاج القدم السكري", desc: "تشخيص وعلاج شامل" },
-  { icon: Heart, title: "قرح القدم السكري", desc: "ضمادات متطورة" },
-  { icon: Shield, title: "الجروح المزمنة", desc: "أساليب متقدمة" },
-  { icon: Stethoscope, title: "قرح الفراش", desc: "برامج متكاملة" },
-  { icon: Clock, title: "تغيير الضمادات", desc: "مواد عالمية" },
-  { icon: Award, title: "الوقاية من البتر", desc: "حفظ الأطراف" },
+  { icon: Heart, title: "علاج تقرحات القدم السكري", desc: "ضمادات متطورة" },
+  { icon: Shield, title: "علاج الجروح المزمنة والمعقدة", desc: "أساليب متقدمة" },
+  { icon: Stethoscope, title: "علاج قرح الضغط والفراش", desc: "برامج متكاملة" },
+  { icon: Syringe, title: "إزالة الأنسجة الميتة", desc: "إزالة الأنسجة الميتة" },
+  { icon: Award, title: "الوقاية من البتر ومضاعفات السكري", desc: "حفظ الأطراف" },
 ];
 
 const testimonials = [
@@ -48,12 +48,77 @@ export default async function Home() {
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#0a3a63] via-[#0F4C81] to-[#1565C0]">
-        <div className="absolute inset-0 bg-[url('/images/hero-1.jpg')] opacity-10 bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/images/hero-1.png')] opacity-10 bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a3a63]/90 to-transparent" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div className="text-center lg:text-right">
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 mb-5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-10 items-center">
+            {/* Mobile-only badge */}
+            <div className="order-1 flex justify-center lg:hidden">
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5">
+                <Stethoscope className="w-4 h-4 text-blue-200" />
+                <span className="text-blue-100 text-sm">مركز طبي متخصص</span>
+              </div>
+            </div>
+
+            {/* Image */}
+            <div className="order-2 flex justify-center items-center lg:order-2">
+              <div className="relative animate-float">
+                {/* Subtle glow - no blur */}
+                <div className="absolute -inset-3 rounded-full bg-[#1E88E5]/20" />
+
+                {/* Clean circular image with gradient ring */}
+                <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px]">
+                  {/* Gradient ring border */}
+                  <div className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-br from-[#1E88E5] via-[#0F4C81] to-[#1E88E5] shadow-xl">
+                    {/* Inner white ring */}
+                    <div className="w-full h-full rounded-full p-[3px] bg-gradient-to-b from-white/30 to-white/10">
+                      {/* Image - sharp, no overflow-hidden issues */}
+                      <img
+                        src="/images/doctor-circle.png"
+                        alt="معتز أبو رميلة - أخصائي القدم السكري"
+                        className="w-full h-full rounded-full object-cover object-top"
+                        loading="eager"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Top badge */}
+                <div className="absolute top-6 -left-8 bg-white rounded-2xl px-4 py-2.5 shadow-xl border border-blue-50 flex items-center gap-2 hidden md:flex">
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                    <Award className="w-4 h-4 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-[#0F4C81] text-xs leading-none">أخصائي معتمد</p>
+                    <p className="text-[10px] text-gray-400 mt-0.5">القدم السكري</p>
+                  </div>
+                </div>
+
+                {/* Bottom stats card */}
+                <div className="absolute -bottom-6 -right-8 bg-white rounded-2xl p-4 shadow-xl border border-blue-50 hidden md:block">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#0F4C81] to-[#1E88E5] rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/20">
+                      <Users className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-extrabold text-[#0F4C81] text-lg leading-none">+1000</p>
+                      <p className="text-xs text-gray-500 mt-0.5">مريض تم علاجه</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Decorative dots */}
+                <div className="absolute -right-1 top-1/2 -translate-y-1/2 flex flex-col gap-1.5 hidden md:flex">
+                  <span className="w-2 h-2 bg-[#1E88E5] rounded-full opacity-60" />
+                  <span className="w-2 h-2 bg-[#1E88E5] rounded-full opacity-40" />
+                  <span className="w-2 h-2 bg-[#1E88E5] rounded-full opacity-20" />
+                </div>
+              </div>
+            </div>
+
+            {/* Text block */}
+            <div className="order-3 text-center lg:text-right lg:order-1">
+              <div className="hidden lg:inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/20 rounded-full px-4 py-1.5 mb-5">
                 <Stethoscope className="w-4 h-4 text-blue-200" />
                 <span className="text-blue-100 text-sm">مركز طبي متخصص</span>
               </div>
@@ -73,60 +138,6 @@ export default async function Home() {
                 </a>
               </div>
             </div>
-            <div className="hidden lg:flex justify-center items-center">
-              <div className="relative animate-float">
-                {/* Subtle glow - no blur */}
-                <div className="absolute -inset-3 rounded-full bg-[#1E88E5]/20" />
-
-                {/* Clean circular image with gradient ring */}
-                <div className="relative w-[420px] h-[420px]">
-                  {/* Gradient ring border */}
-                  <div className="absolute inset-0 rounded-full p-[3px] bg-gradient-to-br from-[#1E88E5] via-[#0F4C81] to-[#1E88E5] shadow-xl">
-                    {/* Inner white ring */}
-                    <div className="w-full h-full rounded-full p-[3px] bg-gradient-to-b from-white/30 to-white/10">
-                      {/* Image - sharp, no overflow-hidden issues */}
-                      <img
-                        src="/images/doctor-circle.jpg"
-                        alt="معتز أبو رميلة - أخصائي القدم السكري"
-                        className="w-full h-full rounded-full object-cover object-top"
-                        loading="eager"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Top badge */}
-                <div className="absolute top-6 -left-8 bg-white rounded-2xl px-4 py-2.5 shadow-xl border border-blue-50 flex items-center gap-2">
-                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                    <Award className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-[#0F4C81] text-xs leading-none">أخصائي معتمد</p>
-                    <p className="text-[10px] text-gray-400 mt-0.5">القدم السكري</p>
-                  </div>
-                </div>
-
-                {/* Bottom stats card */}
-                <div className="absolute -bottom-6 -right-8 bg-white rounded-2xl p-4 shadow-xl border border-blue-50">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-[#0F4C81] to-[#1E88E5] rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/20">
-                      <Users className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-extrabold text-[#0F4C81] text-lg leading-none">+1000</p>
-                      <p className="text-xs text-gray-500 mt-0.5">مريض تم علاجه</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Decorative dots */}
-                <div className="absolute -right-1 top-1/2 -translate-y-1/2 flex flex-col gap-1.5">
-                  <span className="w-2 h-2 bg-[#1E88E5] rounded-full opacity-60" />
-                  <span className="w-2 h-2 bg-[#1E88E5] rounded-full opacity-40" />
-                  <span className="w-2 h-2 bg-[#1E88E5] rounded-full opacity-20" />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <svg viewBox="0 0 1440 80" className="absolute bottom-0 w-full">
@@ -135,7 +146,7 @@ export default async function Home() {
       </section>
 
       {/* Stats */}
-      <section className="relative z-10 -mt-6">
+      <section className="relative z-10 -mt-6 hidden md:block">
         <div className="max-w-5xl mx-auto px-4">
           <div className="bg-white rounded-3xl shadow-xl p-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {stats.map((s, i) => (
@@ -176,12 +187,70 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* About Specialist */}
+      <section className="py-16 bg-[#FAFBFC]">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-10 items-start">
+            {/* Text Column */}
+            <div className="order-2 lg:order-1">
+              <div className="inline-flex items-center gap-2 bg-[#0F4C81]/5 border border-[#0F4C81]/10 rounded-full px-4 py-1.5 mb-4">
+                <Stethoscope className="w-4 h-4 text-[#0F4C81]" />
+                <span className="text-[#0F4C81] text-sm font-semibold">خبرة متخصصة في علاج الجروح</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-[#0F4C81] mb-4">
+                الأخصائي معتز أبو رميله
+              </h2>
+              <div className="space-y-3 text-gray-600 leading-relaxed">
+                <p>
+                  يُعد الأخصائي معتز أبو رميله من أبرز المتخصصين في علاج القدم السكرية والجروح المزمنة في فلسطين، بخبرة مهنية واسعة تمتد لأكثر من عشر سنوات في هذا المجال.
+                </p>
+                <p>
+                  وُلد الأخصائي معتز أبو رميله في مدينة الخليل، وتخرج في جامعة الخليل حاصلًا على درجة البكالوريوس في التمريض. بدأ مسيرته المهنية ممرضًا في مستشفى محمد علي المحتسب، ثم انتقل للعمل ممرض عمليات في مستشفى الأهلي – الخليل، حيث أمضى عشر سنوات اكتسب خلالها خبرة واسعة في الرعاية الجراحية، وإدارة الحالات المعقدة، والتعامل مع مختلف التخصصات الجراحية.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 mt-5">
+                <div className="bg-white rounded-xl px-4 py-2.5 border border-gray-100 shadow-sm flex items-center gap-2">
+                  <Award className="w-4 h-4 text-[#0F4C81]" />
+                  <span className="text-sm font-semibold text-[#0F4C81]">+10 سنوات خبرة</span>
+                </div>
+                <div className="bg-white rounded-xl px-4 py-2.5 border border-gray-100 shadow-sm flex items-center gap-2">
+                  <Users className="w-4 h-4 text-[#0F4C81]" />
+                  <span className="text-sm font-semibold text-[#0F4C81]">آلاف الحالات المعالجة</span>
+                </div>
+              </div>
+              <Link href="/about-specialist" className="inline-flex items-center gap-2 bg-[#0F4C81] text-white px-6 py-3 rounded-xl font-bold mt-6 hover:bg-[#1565C0] transition shadow-lg">
+                اقرأ السيرة المهنية <ArrowLeft className="w-4 h-4" />
+              </Link>
+            </div>
+            {/* Image Column */}
+            <div className="order-1 lg:order-2 flex flex-col items-center gap-6">
+              <div className="relative">
+                <div className="absolute -inset-3 rounded-full bg-[#0F4C81]/10" />
+                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full p-[4px] bg-gradient-to-br from-[#0F4C81] via-[#1E88E5] to-[#0F4C81]">
+                  <div className="w-full h-full rounded-full p-[3px] bg-gradient-to-b from-white/30 to-white/10">
+                    <img
+                      src="/cv.png"
+                      alt="الأخصائي معتز أبو رميله"
+                      className="w-full h-full rounded-full object-cover object-top"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services */}
       <section className="py-16 bg-gradient-to-b from-[#F8FAFC] to-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <span className="text-[#1E88E5] font-semibold text-sm">خدماتنا</span>
-            <h2 className="text-3xl font-extrabold text-[#0F4C81] mt-2">نقدم لك رعاية شاملة</h2>
+            <h2 className="text-3xl font-extrabold text-[#0F4C81] mt-2">خدماتنا المتخصصة</h2>
+            <p className="text-gray-600 mt-4 max-w-3xl mx-auto leading-relaxed">
+              نقدّم في مركز D.F.C لعلاج القدم السكري والجروح المزمنة مجموعة متكاملة من الخدمات الطبية المتخصصة، بدءًا من التقييم الدقيق للحالة ووضع الخطة العلاجية المناسبة، وصولًا إلى المتابعة المستمرة والوقاية من المضاعفات، باستخدام أحدث التقنيات والضمادات الطبية المتطورة.
+            </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((s, i) => (
@@ -198,31 +267,6 @@ export default async function Home() {
             <Link href="/services" className="inline-flex items-center gap-2 bg-[#0F4C81] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#1565C0] transition shadow-lg">
               عرض جميع الخدمات <ChevronLeft className="w-4 h-4" />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Clinic */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div>
-              <span className="text-[#1E88E5] font-semibold text-sm">بيئة العلاج</span>
-              <h2 className="text-3xl font-extrabold text-[#0F4C81] mt-2 mb-4">مرافق حديثة ومجهزة</h2>
-              <p className="text-gray-600 mb-5">مركزنا مجهز بأحدث الأجهزة لضمان تقديم أفضل رعاية صحية.</p>
-              <div className="space-y-2">
-                {["أجهزة تشخيص متطورة", "غرف علاج معقمة", "ضمادات عالمية", "فريق طبي متخصص"].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center"><Shield className="w-3 h-3 text-green-600" /></div>
-                    <span className="text-sm text-gray-700">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative group max-w-lg mx-auto">
-              <div className="absolute -inset-2 bg-gradient-to-br from-[#1E88E5]/10 to-[#0F4C81]/10 rounded-3xl" />
-              <Image src="/images/service-cropped.jpg" alt="قبل وبعد العلاج" width={480} height={374} className="relative rounded-3xl shadow-lg object-cover w-full group-hover:scale-[1.02] transition" />
-            </div>
           </div>
         </div>
       </section>

@@ -7,6 +7,7 @@ import Image from "next/image";
 
 const navLinks = [
   { href: "/", label: "الرئيسية" },
+  { href: "/about-specialist", label: "عن الأخصائي" },
   { href: "/about", label: "عن المركز" },
   { href: "/services", label: "الخدمات" },
   { href: "/testimonials", label: "قصص النجاح" },
@@ -70,7 +71,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 order-4 md:order-1 flex-row-reverse md:flex-row">
-            <Image src="/logo-icon.svg" alt="D.F.C Logo" width={44} height={44} className="rounded-lg" />
+            <Image src="/images/logo.png" alt="Advanced Diabetic Foot & Wound Care Center Logo" width={50} height={50} className="rounded-lg object-contain" />
             <div className="flex flex-col">
               <span className="text-xl font-extrabold text-[#0F4C81] leading-none">D.F.C</span>
               <span className="text-[10px] text-gray-500 leading-none mt-0.5">Diabetic Foot Care</span>

@@ -15,6 +15,7 @@ import {
   X,
   ChevronLeft,
 } from "lucide-react";
+import Image from "next/image";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -67,9 +68,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
       <aside className="hidden lg:flex w-72 flex-col bg-white border-l border-slate-200 fixed inset-y-0 right-0 z-10">
         <div className="p-6 border-b border-slate-100">
           <Link href="/admin/dashboard" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#0F4C81] rounded-xl flex items-center justify-center">
-              <LayoutDashboard className="w-5 h-5 text-white" />
-            </div>
+            <Image src="/images/logo.png" alt="D.F.C Logo" width={40} height={40} className="rounded-lg object-contain" />
             <div>
               <h1 className="text-lg font-bold text-[#0F4C81]">لوحة التحكم</h1>
               <p className="text-xs text-slate-400">D.F.C</p>
@@ -126,9 +125,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
       >
         <div className="p-5 border-b border-slate-100 flex items-center justify-between">
           <Link href="/admin/dashboard" className="flex items-center gap-3" onClick={() => setSidebarOpen(false)}>
-            <div className="w-10 h-10 bg-[#0F4C81] rounded-xl flex items-center justify-center">
-              <LayoutDashboard className="w-5 h-5 text-white" />
-            </div>
+            <Image src="/images/logo.png" alt="D.F.C Logo" width={40} height={40} className="rounded-lg object-contain" />
             <h1 className="text-lg font-bold text-[#0F4C81]">لوحة التحكم</h1>
           </Link>
           <button onClick={() => setSidebarOpen(false)} className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg">

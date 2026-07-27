@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Lock, User, Shield, AlertCircle, Loader2 } from "lucide-react";
+import { Lock, User, AlertCircle, Loader2 } from "lucide-react";
+import Image from "next/image";
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState("");
@@ -40,8 +41,8 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md">
         {/* Logo / Header */}
         <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-[#0F4C81] rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-[#0F4C81]/25">
-            <Shield className="w-10 h-10 text-white" />
+          <div className="mx-auto mb-5">
+            <Image src="/images/logo.png" alt="D.F.C Logo" width={80} height={80} className="rounded-2xl object-contain" />
           </div>
           <h1 className="text-2xl font-bold text-slate-800">بوابة الطبيب</h1>
           <p className="text-slate-500 mt-2">تسجيل الدخول إلى لوحة تحكم مركز D.F.C</p>

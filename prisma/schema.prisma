@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,7 +10,7 @@ datasource db {
 model VisitType {
   id          Int      @id @default(autoincrement())
   name        String
-  slotCount   Int      @default(1) // number of 30-min slots needed
+  slotCount   Int      @default(1)
   minDuration Int      @default(30)
   maxDuration Int      @default(60)
   restMinutes Int      @default(15)
@@ -24,32 +21,32 @@ model VisitType {
 
 model WorkSchedule {
   id        Int      @id @default(autoincrement())
-  dayOfWeek Int      // 0=Sunday, 1=Monday... 6=Saturday
-  startTime String   // HH:mm format
-  endTime   String   // HH:mm format
+  dayOfWeek Int
+  startTime String
+  endTime   String
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Holiday {
-  id          Int      @id @default(autoincrement())
-  title       String
-  startDate   DateTime
-  endDate     DateTime
-  isFullDay   Boolean  @default(true)
-  startTime   String?  // HH:mm format (for partial-day holidays)
-  endTime     String?  // HH:mm format (for partial-day holidays)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  title     String
+  startDate DateTime
+  endDate   DateTime
+  isFullDay Boolean  @default(true)
+  startTime String?
+  endTime   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model TimeBlock {
   id        Int      @id @default(autoincrement())
   title     String
   date      DateTime
-  startTime String   // HH:mm format
-  endTime   String   // HH:mm format
+  startTime String
+  endTime   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -60,20 +57,20 @@ model Appointment {
   phone         String
   visitType     String
   date          DateTime
-  time          String   // HH:mm format (start time)
-  slotsReserved Int      @default(1) // number of 30-min slots reserved
+  time          String
+  slotsReserved Int      @default(1)
   description   String?
-  status        String   @default("pending") // pending, confirmed, cancelled
+  status        String   @default("pending")
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
 
 model Testimonial {
-  id        Int      @id @default(autoincrement())
-  name      String
-  image     String?
-  text      String
+  id          Int      @id @default(autoincrement())
+  name        String
+  image       String?
+  text        String
   publishedAt DateTime
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
