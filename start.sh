@@ -140,7 +140,7 @@ if [ -d ".next/standalone" ]; then
   cd .next/standalone
   ln -sfn ../../public public 2>/dev/null || true
   mkdir -p .next
-  ln -sfn ../../.next/static .next/static 2>/dev/null || true
+  ln -sfn ../../../.next/static .next/static 2>/dev/null || true
   cd ../..
 fi
 
