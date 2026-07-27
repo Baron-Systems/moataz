@@ -37,7 +37,7 @@ echo ""
 # 4. Pull latest code from GitHub
 # ════════════════════════════════════════
 echo "[1/7] Pulling latest updates from GitHub..."
-git pull origin main
+git pull origin dev
 
 # ════════════════════════════════════════
 # 5. Install dependencies
